@@ -8,7 +8,7 @@ enum WeatherCondition {
   rainy,
   cloudy,
   snowy,
-  unknown
+  unknown,
 }
 
 @JsonSerializable()
@@ -17,9 +17,10 @@ class Weather extends Equatable {
     required this.location,
     required this.temperature,
     required this.condition,
-});
+  });
 
-  factory Weather.fromJson(Map<String, dynamic> json) => _$WeatherFromJson(json);
+  factory Weather.fromJson(Map<String, dynamic> json) =>
+      _$WeatherFromJson(json);
 
   Map<String, dynamic> toJson() => _$WeatherToJson(this);
 

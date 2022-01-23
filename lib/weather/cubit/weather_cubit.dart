@@ -1,12 +1,11 @@
 import 'package:equatable/equatable.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:very_good_weather/weather/weather.dart';
 import 'package:weather_repository/weather_repository.dart'
     show WeatherRepository;
 
-import '../models/weather.dart';
-
-part '../weather_cubit.g.dart';
+part 'weather_cubit.g.dart';
 part 'weather_state.dart';
 
 class WeatherCubit extends HydratedCubit<WeatherState> {
@@ -14,10 +13,9 @@ class WeatherCubit extends HydratedCubit<WeatherState> {
 
   final WeatherRepository _weatherRepository;
 
-  // Retrieves weather object for given city from weather repository
   Future<void> fetchWeather(String? city) async {
     if (city == null || city.isEmpty) return;
-    // emits a new state with changed "status" value to "loading"
+    // Retrieves weather object for given city from weather repository
     emit(state.copyWith(status: WeatherStatus.loading));
 
     try {
@@ -32,7 +30,6 @@ class WeatherCubit extends HydratedCubit<WeatherState> {
 
       // Current temperature units
       final units = state.temperatureUnits;
-
       final value = units.isFahrenheit
           ? weather.temperature.value.toFahrenheit()
           : weather.temperature.value;
@@ -55,19 +52,17 @@ class WeatherCubit extends HydratedCubit<WeatherState> {
   Future<void> refreshWeather() async {
     if (!state.status.isSuccess) return;
     if (state.weather == Weather.empty) return;
-
     try {
+      /*
+        Within the weatherRepository, "getWeather()" attempts to retrieve updated weather data from external DB,
+        and returns an updated Weather() object for the current state's location.
+       */
       final weather = Weather.fromRepository(
-        /*
-          Within the weatherRepository, "getWeather()" attempts to retrieve updated weather data from external DB,
-          and returns an updated Weather() object for the current state's location.
-         */
         await _weatherRepository.getWeather(state.weather.location),
       );
 
       // Current temperature units
       final units = state.temperatureUnits;
-
       final value = units.isFahrenheit
           ? weather.temperature.value.toFahrenheit()
           : weather.temperature.value;
@@ -99,13 +94,11 @@ class WeatherCubit extends HydratedCubit<WeatherState> {
     }
 
     final weather = state.weather;
-
     if (weather != Weather.empty) {
       final temperature = weather.temperature;
       final value = units.isCelsius
           ? temperature.value.toCelsius()
           : temperature.value.toFahrenheit();
-
       // Emits a new state containing updated temperatureUnits and weather values if weather isn't empty
       emit(
         state.copyWith(

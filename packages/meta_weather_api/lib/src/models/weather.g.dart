@@ -14,10 +14,16 @@ Weather _$WeatherFromJson(Map<String, dynamic> json) {
       id: $checkedConvert(json, 'id', (v) => v as int),
       weatherStateName:
           $checkedConvert(json, 'weather_state_name', (v) => v as String),
-      weatherStateAbbr: $checkedConvert(json, 'weather_state_abbr',
-          (v) => _$enumDecode(_$WeatherStateEnumMap, v)),
-      windDirectionCompass: $checkedConvert(json, 'wind_direction_compass',
-          (v) => _$enumDecode(_$WindDirectionCompassEnumMap, v)),
+      weatherStateAbbr: $checkedConvert(
+          json,
+          'weather_state_abbr',
+          (v) => _$enumDecode(_$WeatherStateEnumMap, v,
+              unknownValue: WeatherState.unknown)),
+      windDirectionCompass: $checkedConvert(
+          json,
+          'wind_direction_compass',
+          (v) => _$enumDecode(_$WindDirectionCompassEnumMap, v,
+              unknownValue: WindDirectionCompass.unknown)),
       created:
           $checkedConvert(json, 'created', (v) => DateTime.parse(v as String)),
       applicableDate: $checkedConvert(

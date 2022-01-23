@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:meta_weather_api/meta_weather_api.dart';
 
@@ -17,31 +16,26 @@ class WeatherRequestFailure implements Exception {}
 /// Exception thrown when weather for provided location is not found.
 class WeatherNotFoundFailure implements Exception {}
 
-
-
 /// {@template meta_weather_api_client}
 /// Dart API Client which wraps the [MetaWeather API](https://www.metaweather.com/api/).
 /// {@endtemplate}
 class MetaWeatherApiClient {
   /// {@macro meta_weather_api_client}
-  MetaWeatherApiClient({http.Client? httpClient}) : _httpClient = httpClient ?? http.Client();
+  MetaWeatherApiClient({http.Client? httpClient})
+      : _httpClient = httpClient ?? http.Client();
 
-  static const _baseUrl = "www.metaweather.com";
-
-  /// http.Client = interface for HTTP clients that take care of maintaining persistent connections across multiple requests to the same server.
+  static const _baseUrl = 'www.metaweather.com';
   final http.Client _httpClient;
 
-  /// Finds a location `api/location/search/?query=(query)`
+  /// Finds a [Location] `/api/location/search/?query=(query)`.
   Future<Location> locationSearch(String query) async {
     final locationRequest = Uri.https(
       _baseUrl,
       '/api/location/search',
-      <String, String>{'query' : query},
+      <String, String>{'query': query},
     );
-
     final locationResponse = await _httpClient.get(locationRequest);
 
-    /// Throws failure if _httpClient.get(locationRequest) doesn't return a success status code.
     if (locationResponse.statusCode != 200) {
       throw LocationIdRequestFailure();
     }
@@ -57,17 +51,15 @@ class MetaWeatherApiClient {
     return Location.fromJson(locationJson.first as Map<String, dynamic>);
   }
 
-  // Grabs [Weather] for given [locationId].
+  /// Fetches [Weather] for a given [locationId].
   Future<Weather> getWeather(int locationId) async {
-
-   // Creates a new HTTPS URI
     final weatherRequest = Uri.https(_baseUrl, '/api/location/$locationId');
-    //
     final weatherResponse = await _httpClient.get(weatherRequest);
 
-    if(weatherResponse.statusCode != 200) {
+    if (weatherResponse.statusCode != 200) {
       throw WeatherRequestFailure();
     }
+
     final bodyJson = jsonDecode(weatherResponse.body) as Map<String, dynamic>;
 
     if (bodyJson.isEmpty) {
@@ -81,6 +73,5 @@ class MetaWeatherApiClient {
     }
 
     return Weather.fromJson(weatherJson.first as Map<String, dynamic>);
-
   }
 }
