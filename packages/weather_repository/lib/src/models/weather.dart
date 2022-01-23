@@ -8,7 +8,7 @@ enum WeatherCondition {
   rainy,
   cloudy,
   snowy,
-  unkown
+  unknown
 }
 
 @JsonSerializable()
