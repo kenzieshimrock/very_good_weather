@@ -21,8 +21,8 @@ class SettingsPage extends StatelessWidget {
           child: Row(
             children: [
               Image.asset(
-                'assets/vgv_unicorn_filled.png',
-                scale: 45,
+                'assets/vgv_logo.png',
+                scale: 14,
               ),
               SizedBox(
                 width: Sizing.standard,

@@ -31,8 +31,8 @@ class _SearchPageState extends State<SearchPage> {
           child: Row(
             children: [
               Image.asset(
-                'assets/vgv_unicorn_filled.png',
-                scale: 45,
+                'assets/vgv_logo.png',
+                scale: 14,
               ),
               SizedBox(
                 width: Sizing.standard,
@@ -79,13 +79,12 @@ class _SearchPageState extends State<SearchPage> {
                     ? Navigator.of(context).pop(_text)
                     : ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
+                          backgroundColor: Colors.white,
+                          duration: const Duration(seconds: 4),
                           padding: EdgeInsets.all(Sizing.standard),
-                          content: Text(
-                            'Search field cannot be blank.',
-                            style: TextStyle(
-                              fontSize: Sizing.standard,
-                            ),
-                          ),
+                          content: Image.asset(
+                              'assets/unicorn_snackbar_black.png',
+                              scale: 4.5),
                         ),
                       );
               },
