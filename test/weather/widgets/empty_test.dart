@@ -13,8 +13,7 @@ void main() {
           ),
         ),
       );
-      expect(find.text('Please Select a City!'), findsOneWidget);
-      expect(find.text('🏙️'), findsOneWidget);
+      expect(find.text('Please Search for a City'), findsOneWidget);
     });
   });
 }

@@ -3,13 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:very_good_weather/search/search.dart';
 import 'package:very_good_weather/settings/settings.dart';
 import 'package:very_good_weather/styles/sizing.dart';
-import 'package:very_good_weather/theme/theme.dart';
 import 'package:very_good_weather/weather/weather.dart';
 import 'package:weather_repository/weather_repository.dart';
 
 class WeatherPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // BlocProvider creates the single instance of WeatherCubit() within the widget tree
     return BlocProvider(
       create: (context) => WeatherCubit(context.read<WeatherRepository>()),
       child: WeatherView(),
@@ -52,12 +52,8 @@ class WeatherView extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(30.0),
         child: Center(
-          child: BlocConsumer<WeatherCubit, WeatherState>(
-            listener: (context, state) {
-              if (state.status.isSuccess) {
-                context.read<ThemeCubit>().updateTheme(state.weather);
-              }
-            },
+          // BlocBuilder allows UI to re-render based on state changes emitted from WeatherCubit() instance
+          child: BlocBuilder<WeatherCubit, WeatherState>(
             builder: (context, state) {
               switch (state.status) {
                 case WeatherStatus.initial:

@@ -15,7 +15,6 @@ void main() {
       );
       expect(find.text('Loading Weather'), findsOneWidget);
       expect(find.byType(CircularProgressIndicator), findsOneWidget);
-      expect(find.text('⛅'), findsOneWidget);
     });
   });
 }

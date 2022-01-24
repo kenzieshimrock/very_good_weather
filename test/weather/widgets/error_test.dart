@@ -14,7 +14,11 @@ void main() {
         ),
       );
       expect(find.text('Something went wrong!'), findsOneWidget);
-      expect(find.text('🙈'), findsOneWidget);
+      expect(
+          find.text(
+              'Check your connection, or try searching for a different city.'),
+          findsWidgets);
+      expect(find.byIcon(Icons.error_outline), findsOneWidget);
     });
   });
 }

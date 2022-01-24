@@ -6,6 +6,7 @@ import 'package:very_good_weather/weather/weather.dart';
 class SettingsPage extends StatelessWidget {
   static Route route(WeatherCubit weatherCubit) {
     return MaterialPageRoute<void>(
+      // BlocProvider.value provides the existing WeatherCubit instance to its child.
       builder: (_) => BlocProvider.value(
         value: weatherCubit,
         child: SettingsPage(),
@@ -37,6 +38,7 @@ class SettingsPage extends StatelessWidget {
         padding: EdgeInsets.all(Sizing.standard),
         child: ListView(
           children: <Widget>[
+            // BlocBuilder rebuilds UI based on state changes emitting from WeatherCubit() instance
             BlocBuilder<WeatherCubit, WeatherState>(
               buildWhen: (previous, current) =>
                   previous.temperatureUnits != current.temperatureUnits,

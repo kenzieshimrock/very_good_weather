@@ -16,7 +16,6 @@ class WeatherPopulated extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final theme = Theme.of(context);
     return Stack(
       children: [
         // _WeatherBackground(),
@@ -79,7 +78,7 @@ extension on WeatherCondition {
         return 'assets/weather_icons/snowy.png';
       case WeatherCondition.unknown:
       default:
-        return '❓';
+        return 'assets/weather_icons/sunny.png';
     }
   }
 }
