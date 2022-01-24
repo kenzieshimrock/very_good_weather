@@ -2,8 +2,8 @@
 
 A weather app that is just too cool.
 
-![GitHub-Mark-Light](./assets/lockup.png)
-![GitHub-Mark-Dark](./assets/lockup_dark_mode.png)
+![GitHub-Mark-Light](./assets/lockup.png#gh-light-mode-only)
+![GitHub-Mark-Dark](./assets/lockup_dark_mode.png#gh-dark-mode-only)
 
 ## Getting Started
 
