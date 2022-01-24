@@ -80,7 +80,7 @@ class _SearchPageState extends State<SearchPage> {
                     : ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           backgroundColor: Colors.white,
-                          duration: const Duration(seconds: 4),
+                          duration: const Duration(seconds: 3),
                           padding: EdgeInsets.all(Sizing.standard),
                           content: Image.asset(
                               'assets/unicorn_snackbar_black.png',
