@@ -11,7 +11,8 @@ void main() {
             builder: (context) => Scaffold(
               floatingActionButton: FloatingActionButton(
                 onPressed: () {
-                  Navigator.of(context).push(SearchPage.route());
+                  Navigator.of(context)
+                      .push(SearchPage.route());
                 },
               ),
             ),
@@ -23,7 +24,8 @@ void main() {
       expect(find.byType(SearchPage), findsOneWidget);
     });
 
-    testWidgets('returns selected text when popped', (tester) async {
+    testWidgets('returns selected text when popped',
+        (tester) async {
       String? location;
       await tester.pumpWidget(
         MaterialApp(
@@ -31,7 +33,8 @@ void main() {
             builder: (context) => Scaffold(
               floatingActionButton: FloatingActionButton(
                 onPressed: () async {
-                  location = await Navigator.of(context).push(
+                  location =
+                      await Navigator.of(context).push(
                     SearchPage.route(),
                   );
                 },
@@ -40,10 +43,18 @@ void main() {
           ),
         ),
       );
+
       await tester.tap(find.byType(FloatingActionButton));
       await tester.pumpAndSettle();
-      await tester.enterText(find.byType(TextField), 'Chicago');
-      await tester.tap(find.byKey(const Key('searchPage_search_iconButton')));
+      await tester.enterText(
+        find.byType(TextField),
+        'Chicago',
+      );
+      await tester.tap(
+        find.byKey(
+          const Key('searchPage_search_iconButton'),
+        ),
+      );
       await tester.pumpAndSettle();
       expect(find.byType(SearchPage), findsNothing);
       expect(location, 'Chicago');
