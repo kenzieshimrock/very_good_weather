@@ -15,7 +15,8 @@ Future<void> main() async {
   );
   HydratedBlocOverrides.runZoned(
     () => runApp(
-        WeatherApp(weatherRepository: WeatherRepository())),
+      WeatherApp(weatherRepository: WeatherRepository()),
+    ),
     storage: storage,
   );
 }
