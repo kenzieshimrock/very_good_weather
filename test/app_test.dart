@@ -39,7 +39,7 @@ void main() {
         await tester.pumpWidget(
           RepositoryProvider.value(
             value: weatherRepository,
-            child: WeatherAppView(),
+            child: const WeatherAppView(),
           ),
         );
       });

@@ -15,12 +15,14 @@ class WeatherApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return RepositoryProvider.value(
       value: _weatherRepository,
-      child: WeatherAppView(),
+      child: const WeatherAppView(),
     );
   }
 }
 
 class WeatherAppView extends StatelessWidget {
+  const WeatherAppView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
@@ -54,7 +56,7 @@ class WeatherAppView extends StatelessWidget {
           color: Colors.black,
         ),
       ),
-      home: WeatherPage(),
+      home: const WeatherPage(),
     );
   }
 }
