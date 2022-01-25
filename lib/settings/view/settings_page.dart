@@ -43,7 +43,7 @@ class SettingsPage extends StatelessWidget {
                   isThreeLine: true,
                   subtitle: Text(
                     'Current: ${state.temperatureUnits.isCelsius ? 'Celsius' : 'Fahrenheit'}',
-                    style: TextStyle(fontSize: Sizing.standard),
+                    style: TextStyle(fontSize: Sizing.medium),
                   ),
                   trailing: Switch(
                     value: state.temperatureUnits.isCelsius,
