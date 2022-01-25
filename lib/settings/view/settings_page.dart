@@ -44,8 +44,7 @@ class SettingsPage extends StatelessWidget {
              */
             BlocBuilder<WeatherCubit, WeatherState>(
               buildWhen: (previous, current) =>
-                  previous.temperatureUnits !=
-                  current.temperatureUnits,
+                  previous.temperatureUnits != current.temperatureUnits,
               builder: (context, state) {
                 return ListTile(
                   title: Text(
@@ -64,9 +63,8 @@ class SettingsPage extends StatelessWidget {
                   ),
                   trailing: Switch(
                     value: state.temperatureUnits.isCelsius,
-                    onChanged: (_) => context
-                        .read<WeatherCubit>()
-                        .toggleUnits(),
+                    onChanged: (_) =>
+                        context.read<WeatherCubit>().toggleUnits(),
                   ),
                 );
               },
