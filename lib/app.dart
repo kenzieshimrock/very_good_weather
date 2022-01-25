@@ -4,9 +4,13 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:very_good_weather/weather/weather.dart';
 import 'package:weather_repository/weather_repository.dart';
 
+/// Weather App base widget
 class WeatherApp extends StatelessWidget {
-  const WeatherApp({Key? key, required WeatherRepository weatherRepository})
-      : _weatherRepository = weatherRepository,
+  /// WeatherApp constructor
+  const WeatherApp({
+    Key? key,
+    required WeatherRepository weatherRepository,
+  })  : _weatherRepository = weatherRepository,
         super(key: key);
 
   final WeatherRepository _weatherRepository;
@@ -20,7 +24,9 @@ class WeatherApp extends StatelessWidget {
   }
 }
 
+/// WeatherAppView widget
 class WeatherAppView extends StatelessWidget {
+  /// WeatherAppView constructor
   const WeatherAppView({Key? key}) : super(key: key);
 
   @override

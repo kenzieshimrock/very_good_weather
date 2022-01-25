@@ -1,13 +1,20 @@
-class Spacing {
-  static double get micro => 6.0;
+/// Spacing class containing literals for consistent spacing.
+abstract class Spacing {
+  /// micro
+  static double get micro => 6;
 
-  static double get small => 8.0;
+  /// small
+  static double get small => 8;
 
-  static double get standard => 16.0;
+  /// standard
+  static double get standard => 16;
 
-  static double get medium => 24.0;
+  /// medium
+  static double get medium => 24;
 
-  static double get large => 36.0;
+  /// large
+  static double get large => 36;
 
-  static double get xlarge => 48.0;
+  /// extralarge
+  static double get xlarge => 48;
 }

@@ -13,18 +13,10 @@ jobs:
         with:
           channel: master
 
-      - name: Install Dependencies
-        run: flutter packages get
-
-      - name: Analyze
-        run: flutter analyze lib test
-
       - name: simple-cspell
         uses: zwaldowski/cspell-action@1.0.0
         with:
-          paths: "**/*.{md,dart}"
+          paths: "**/*.{md}"
 
-      - name: Run tests
-        run: flutter test --no-pub --coverage --test-randomize-ordering-seed random
 
 

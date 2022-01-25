@@ -4,10 +4,9 @@ import 'package:flutter_services_binding/flutter_services_binding.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:very_good_weather/app.dart';
-import 'package:very_good_weather/weather_bloc_observer.dart';
 import 'package:weather_repository/weather_repository.dart';
 
-void main() async {
+Future<void> main() async {
   FlutterServicesBinding.ensureInitialized();
   final storage = await HydratedStorage.build(
     storageDirectory: kIsWeb
@@ -15,8 +14,9 @@ void main() async {
         : await getTemporaryDirectory(),
   );
   HydratedBlocOverrides.runZoned(
-    () => runApp(WeatherApp(weatherRepository: WeatherRepository())),
-    blocObserver: WeatherBlocObserver(),
+    () => runApp(
+      WeatherApp(weatherRepository: WeatherRepository()),
+    ),
     storage: storage,
   );
 }

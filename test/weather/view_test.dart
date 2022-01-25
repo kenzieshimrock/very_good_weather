@@ -45,7 +45,9 @@ void main() {
         mockHydratedStorage(() {
           final weatherCubit = WeatherCubit(weatherRepository);
           expect(
-            weatherCubit.fromJson(weatherCubit.toJson(weatherCubit.state)),
+            weatherCubit.fromJson(
+              weatherCubit.toJson(weatherCubit.state),
+            ),
             weatherCubit.state,
           );
         });
@@ -55,24 +57,32 @@ void main() {
     group('fetchWeather', () {
       blocTest<WeatherCubit, WeatherState>(
         'emits nothing when city is null',
-        build: () => mockHydratedStorage(() => WeatherCubit(weatherRepository)),
+        build: () => mockHydratedStorage(
+          () => WeatherCubit(weatherRepository),
+        ),
         act: (cubit) => cubit.fetchWeather(null),
         expect: () => <WeatherState>[],
       );
 
       blocTest<WeatherCubit, WeatherState>(
         'emits nothing when city is empty',
-        build: () => mockHydratedStorage(() => WeatherCubit(weatherRepository)),
+        build: () => mockHydratedStorage(
+          () => WeatherCubit(weatherRepository),
+        ),
         act: (cubit) => cubit.fetchWeather(''),
         expect: () => <WeatherState>[],
       );
 
       blocTest<WeatherCubit, WeatherState>(
         'calls getWeather with correct city',
-        build: () => mockHydratedStorage(() => WeatherCubit(weatherRepository)),
+        build: () => mockHydratedStorage(
+          () => WeatherCubit(weatherRepository),
+        ),
         act: (cubit) => cubit.fetchWeather(weatherLocation),
         verify: (_) {
-          verify(() => weatherRepository.getWeather(weatherLocation)).called(1);
+          verify(
+            () => weatherRepository.getWeather(weatherLocation),
+          ).called(1);
         },
       );
 
@@ -83,7 +93,9 @@ void main() {
             () => weatherRepository.getWeather(any()),
           ).thenThrow(Exception('oops'));
         },
-        build: () => mockHydratedStorage(() => WeatherCubit(weatherRepository)),
+        build: () => mockHydratedStorage(
+          () => WeatherCubit(weatherRepository),
+        ),
         act: (cubit) => cubit.fetchWeather(weatherLocation),
         expect: () => <WeatherState>[
           WeatherState(status: WeatherStatus.loading),
@@ -93,32 +105,56 @@ void main() {
 
       blocTest<WeatherCubit, WeatherState>(
         'emits [loading, success] when getWeather returns (celsius)',
-        build: () => mockHydratedStorage(() => WeatherCubit(weatherRepository)),
+        build: () => mockHydratedStorage(
+          () => WeatherCubit(weatherRepository),
+        ),
         act: (cubit) => cubit.fetchWeather(weatherLocation),
         expect: () => <dynamic>[
           WeatherState(status: WeatherStatus.loading),
           isA<WeatherState>()
-              .having((w) => w.status, 'status', WeatherStatus.success)
+              .having(
+                (w) => w.status,
+                'status',
+                WeatherStatus.success,
+              )
               .having(
                 (w) => w.weather,
                 'weather',
                 isA<Weather>()
-                    .having((w) => w.lastUpdated, 'lastUpdated', isNotNull)
-                    .having((w) => w.condition, 'condition', weatherCondition)
+                    .having(
+                      (w) => w.lastUpdated,
+                      'lastUpdated',
+                      isNotNull,
+                    )
+                    .having(
+                      (w) => w.condition,
+                      'condition',
+                      weatherCondition,
+                    )
                     .having(
                       (w) => w.temperature,
                       'temperature',
-                      Temperature(value: weatherTemperature),
+                      Temperature(
+                        value: weatherTemperature,
+                      ),
                     )
-                    .having((w) => w.location, 'location', weatherLocation),
+                    .having(
+                      (w) => w.location,
+                      'location',
+                      weatherLocation,
+                    ),
               ),
         ],
       );
 
       blocTest<WeatherCubit, WeatherState>(
         'emits [loading, success] when getWeather returns (fahrenheit)',
-        build: () => mockHydratedStorage(() => WeatherCubit(weatherRepository)),
-        seed: () => WeatherState(temperatureUnits: TemperatureUnits.fahrenheit),
+        build: () => mockHydratedStorage(
+          () => WeatherCubit(weatherRepository),
+        ),
+        seed: () => WeatherState(
+          temperatureUnits: TemperatureUnits.fahrenheit,
+        ),
         act: (cubit) => cubit.fetchWeather(weatherLocation),
         expect: () => <dynamic>[
           WeatherState(
@@ -126,19 +162,37 @@ void main() {
             temperatureUnits: TemperatureUnits.fahrenheit,
           ),
           isA<WeatherState>()
-              .having((w) => w.status, 'status', WeatherStatus.success)
+              .having(
+                (w) => w.status,
+                'status',
+                WeatherStatus.success,
+              )
               .having(
                 (w) => w.weather,
                 'weather',
                 isA<Weather>()
-                    .having((w) => w.lastUpdated, 'lastUpdated', isNotNull)
-                    .having((w) => w.condition, 'condition', weatherCondition)
+                    .having(
+                      (w) => w.lastUpdated,
+                      'lastUpdated',
+                      isNotNull,
+                    )
+                    .having(
+                      (w) => w.condition,
+                      'condition',
+                      weatherCondition,
+                    )
                     .having(
                       (w) => w.temperature,
                       'temperature',
-                      Temperature(value: weatherTemperature.toFahrenheit()),
+                      Temperature(
+                        value: weatherTemperature.toFahrenheit(),
+                      ),
                     )
-                    .having((w) => w.location, 'location', weatherLocation),
+                    .having(
+                      (w) => w.location,
+                      'location',
+                      weatherLocation,
+                    ),
               ),
         ],
       );
@@ -147,28 +201,38 @@ void main() {
     group('refreshWeather', () {
       blocTest<WeatherCubit, WeatherState>(
         'emits nothing when status is not success',
-        build: () => mockHydratedStorage(() => WeatherCubit(weatherRepository)),
+        build: () => mockHydratedStorage(
+          () => WeatherCubit(weatherRepository),
+        ),
         act: (cubit) => cubit.refreshWeather(),
         expect: () => <WeatherState>[],
         verify: (_) {
-          verifyNever(() => weatherRepository.getWeather(any()));
+          verifyNever(
+            () => weatherRepository.getWeather(any()),
+          );
         },
       );
 
       blocTest<WeatherCubit, WeatherState>(
         'emits nothing when location is null',
-        build: () => mockHydratedStorage(() => WeatherCubit(weatherRepository)),
+        build: () => mockHydratedStorage(
+          () => WeatherCubit(weatherRepository),
+        ),
         seed: () => WeatherState(status: WeatherStatus.success),
         act: (cubit) => cubit.refreshWeather(),
         expect: () => <WeatherState>[],
         verify: (_) {
-          verifyNever(() => weatherRepository.getWeather(any()));
+          verifyNever(
+            () => weatherRepository.getWeather(any()),
+          );
         },
       );
 
       blocTest<WeatherCubit, WeatherState>(
         'invokes getWeather with correct location',
-        build: () => mockHydratedStorage(() => WeatherCubit(weatherRepository)),
+        build: () => mockHydratedStorage(
+          () => WeatherCubit(weatherRepository),
+        ),
         seed: () => WeatherState(
           status: WeatherStatus.success,
           weather: Weather(
@@ -180,7 +244,9 @@ void main() {
         ),
         act: (cubit) => cubit.refreshWeather(),
         verify: (_) {
-          verify(() => weatherRepository.getWeather(weatherLocation)).called(1);
+          verify(
+            () => weatherRepository.getWeather(weatherLocation),
+          ).called(1);
         },
       );
 
@@ -191,7 +257,9 @@ void main() {
             () => weatherRepository.getWeather(any()),
           ).thenThrow(Exception('oops'));
         },
-        build: () => mockHydratedStorage(() => WeatherCubit(weatherRepository)),
+        build: () => mockHydratedStorage(
+          () => WeatherCubit(weatherRepository),
+        ),
         seed: () => WeatherState(
           status: WeatherStatus.success,
           weather: Weather(
@@ -207,12 +275,14 @@ void main() {
 
       blocTest<WeatherCubit, WeatherState>(
         'emits updated weather (celsius)',
-        build: () => mockHydratedStorage(() => WeatherCubit(weatherRepository)),
+        build: () => mockHydratedStorage(
+          () => WeatherCubit(weatherRepository),
+        ),
         seed: () => WeatherState(
           status: WeatherStatus.success,
           weather: Weather(
             location: weatherLocation,
-            temperature: Temperature(value: 0.0),
+            temperature: Temperature(value: 0),
             lastUpdated: DateTime(2020),
             condition: weatherCondition,
           ),
@@ -220,32 +290,52 @@ void main() {
         act: (cubit) => cubit.refreshWeather(),
         expect: () => <Matcher>[
           isA<WeatherState>()
-              .having((w) => w.status, 'status', WeatherStatus.success)
+              .having(
+                (w) => w.status,
+                'status',
+                WeatherStatus.success,
+              )
               .having(
                 (w) => w.weather,
                 'weather',
                 isA<Weather>()
-                    .having((w) => w.lastUpdated, 'lastUpdated', isNotNull)
-                    .having((w) => w.condition, 'condition', weatherCondition)
+                    .having(
+                      (w) => w.lastUpdated,
+                      'lastUpdated',
+                      isNotNull,
+                    )
+                    .having(
+                      (w) => w.condition,
+                      'condition',
+                      weatherCondition,
+                    )
                     .having(
                       (w) => w.temperature,
                       'temperature',
-                      Temperature(value: weatherTemperature),
+                      Temperature(
+                        value: weatherTemperature,
+                      ),
                     )
-                    .having((w) => w.location, 'location', weatherLocation),
+                    .having(
+                      (w) => w.location,
+                      'location',
+                      weatherLocation,
+                    ),
               ),
         ],
       );
 
       blocTest<WeatherCubit, WeatherState>(
         'emits updated weather (fahrenheit)',
-        build: () => mockHydratedStorage(() => WeatherCubit(weatherRepository)),
+        build: () => mockHydratedStorage(
+          () => WeatherCubit(weatherRepository),
+        ),
         seed: () => WeatherState(
           temperatureUnits: TemperatureUnits.fahrenheit,
           status: WeatherStatus.success,
           weather: Weather(
             location: weatherLocation,
-            temperature: Temperature(value: 0.0),
+            temperature: Temperature(value: 0),
             lastUpdated: DateTime(2020),
             condition: weatherCondition,
           ),
@@ -253,19 +343,37 @@ void main() {
         act: (cubit) => cubit.refreshWeather(),
         expect: () => <Matcher>[
           isA<WeatherState>()
-              .having((w) => w.status, 'status', WeatherStatus.success)
+              .having(
+                (w) => w.status,
+                'status',
+                WeatherStatus.success,
+              )
               .having(
                 (w) => w.weather,
                 'weather',
                 isA<Weather>()
-                    .having((w) => w.lastUpdated, 'lastUpdated', isNotNull)
-                    .having((w) => w.condition, 'condition', weatherCondition)
+                    .having(
+                      (w) => w.lastUpdated,
+                      'lastUpdated',
+                      isNotNull,
+                    )
+                    .having(
+                      (w) => w.condition,
+                      'condition',
+                      weatherCondition,
+                    )
                     .having(
                       (w) => w.temperature,
                       'temperature',
-                      Temperature(value: weatherTemperature.toFahrenheit()),
+                      Temperature(
+                        value: weatherTemperature.toFahrenheit(),
+                      ),
                     )
-                    .having((w) => w.location, 'location', weatherLocation),
+                    .having(
+                      (w) => w.location,
+                      'location',
+                      weatherLocation,
+                    ),
               ),
         ],
       );
@@ -274,17 +382,23 @@ void main() {
     group('toggleUnits', () {
       blocTest<WeatherCubit, WeatherState>(
         'emits updated units when status is not success',
-        build: () => mockHydratedStorage(() => WeatherCubit(weatherRepository)),
+        build: () => mockHydratedStorage(
+          () => WeatherCubit(weatherRepository),
+        ),
         act: (cubit) => cubit.toggleUnits(),
         expect: () => <WeatherState>[
-          WeatherState(temperatureUnits: TemperatureUnits.fahrenheit),
+          WeatherState(
+            temperatureUnits: TemperatureUnits.fahrenheit,
+          ),
         ],
       );
 
       blocTest<WeatherCubit, WeatherState>(
         'emits updated units and temperature '
         'when status is success (celsius)',
-        build: () => mockHydratedStorage(() => WeatherCubit(weatherRepository)),
+        build: () => mockHydratedStorage(
+          () => WeatherCubit(weatherRepository),
+        ),
         seed: () => WeatherState(
           status: WeatherStatus.success,
           temperatureUnits: TemperatureUnits.fahrenheit,
@@ -299,10 +413,11 @@ void main() {
         expect: () => <WeatherState>[
           WeatherState(
             status: WeatherStatus.success,
-            temperatureUnits: TemperatureUnits.celsius,
             weather: Weather(
               location: weatherLocation,
-              temperature: Temperature(value: weatherTemperature.toCelsius()),
+              temperature: Temperature(
+                value: weatherTemperature.toCelsius(),
+              ),
               lastUpdated: DateTime(2020),
               condition: WeatherCondition.rainy,
             ),
@@ -313,10 +428,11 @@ void main() {
       blocTest<WeatherCubit, WeatherState>(
         'emits updated units and temperature '
         'when status is success (fahrenheit)',
-        build: () => mockHydratedStorage(() => WeatherCubit(weatherRepository)),
+        build: () => mockHydratedStorage(
+          () => WeatherCubit(weatherRepository),
+        ),
         seed: () => WeatherState(
           status: WeatherStatus.success,
-          temperatureUnits: TemperatureUnits.celsius,
           weather: Weather(
             location: weatherLocation,
             temperature: Temperature(value: weatherTemperature),
@@ -345,7 +461,7 @@ void main() {
 }
 
 extension on double {
-  double toFahrenheit() => ((this * 9 / 5) + 32);
+  double toFahrenheit() => (this * 9 / 5) + 32;
 
-  double toCelsius() => ((this - 32) * 5 / 9);
+  double toCelsius() => (this - 32) * 5 / 9;
 }

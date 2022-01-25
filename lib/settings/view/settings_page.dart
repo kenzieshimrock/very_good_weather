@@ -1,14 +1,22 @@
+// ignore_for_file: lines_longer_than_80_chars
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:very_good_weather/styles/sizing.dart';
 import 'package:very_good_weather/weather/weather.dart';
 
+/// SettingsPage widget
 class SettingsPage extends StatelessWidget {
+  /// SettingsPage Widget constructor
   const SettingsPage({Key? key}) : super(key: key);
 
+  /// Returns new MaterialPageRoute
   static Route route(WeatherCubit weatherCubit) {
     return MaterialPageRoute<void>(
-      // BlocProvider.value provides the existing WeatherCubit instance to its child.
+      /*
+       BlocProvider.value provides the existing WeatherCubit
+       instance to its child.
+       */
       builder: (_) => BlocProvider.value(
         value: weatherCubit,
         child: const SettingsPage(),
@@ -30,7 +38,10 @@ class SettingsPage extends StatelessWidget {
         padding: EdgeInsets.all(Sizing.standard),
         child: ListView(
           children: <Widget>[
-            // BlocBuilder rebuilds UI based on state changes emitting from WeatherCubit() instance
+            /*
+               BlocBuilder rebuilds UI based on state changes emitting from
+                WeatherCubit() instance
+             */
             BlocBuilder<WeatherCubit, WeatherState>(
               buildWhen: (previous, current) =>
                   previous.temperatureUnits != current.temperatureUnits,
@@ -38,7 +49,9 @@ class SettingsPage extends StatelessWidget {
                 return ListTile(
                   title: Text(
                     'Temperature Units',
-                    style: TextStyle(fontSize: Sizing.medium),
+                    style: TextStyle(
+                      fontSize: Sizing.medium,
+                    ),
                   ),
                   isThreeLine: true,
                   subtitle: Text(

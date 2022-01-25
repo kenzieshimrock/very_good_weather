@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:very_good_weather/styles/sizing.dart';
 import 'package:very_good_weather/weather/weather.dart';
 
+/// WeatherPopulated widget is displayed on weather page
+/// when data is successfully retrieved from weather_repository
 class WeatherPopulated extends StatelessWidget {
+  /// WeatherPopulated constructor
   const WeatherPopulated({
     Key? key,
     required this.weather,
@@ -10,8 +13,13 @@ class WeatherPopulated extends StatelessWidget {
     required this.onRefresh,
   }) : super(key: key);
 
+  /// weather data from weather_repository
   final Weather weather;
+
+  /// celsius or fahrenheit
   final TemperatureUnits units;
+
+  /// function that is called when user "refreshes" weather page
   final ValueGetter<Future<void>> onRefresh;
 
   @override
@@ -28,19 +36,27 @@ class WeatherPopulated extends StatelessWidget {
             child: Center(
               child: Column(
                 children: [
-                  _WeatherIcon(condition: weather.condition),
+                  _WeatherIcon(
+                    condition: weather.condition,
+                  ),
                   Text(
                     weather.location,
-                    style: TextStyle(fontSize: (Sizing.xlarge * 1.3)),
+                    style: TextStyle(
+                      fontSize: Sizing.xlarge * 1.3,
+                    ),
                   ),
                   Text(
                     weather.formattedTemperature(units),
-                    style: TextStyle(fontSize: (Sizing.xlarge * 1.3)),
+                    style: TextStyle(
+                      fontSize: Sizing.xlarge * 1.3,
+                    ),
                   ),
                   Text(
                     '''Last Updated at ${TimeOfDay.fromDateTime(weather.lastUpdated).format(context)}''',
-                    style:
-                        TextStyle(fontSize: Sizing.medium, color: Colors.grey),
+                    style: TextStyle(
+                      fontSize: Sizing.medium,
+                      color: Colors.grey,
+                    ),
                   ),
                 ],
               ),
@@ -78,7 +94,6 @@ extension on WeatherCondition {
       case WeatherCondition.snowy:
         return 'assets/weather_icons/snowy.png';
       case WeatherCondition.unknown:
-      default:
         return 'assets/weather_icons/sunny.png';
     }
   }

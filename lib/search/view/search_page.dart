@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:very_good_weather/styles/sizing.dart';
 
+/// SearchPage widget
 class SearchPage extends StatefulWidget {
   const SearchPage._({Key? key}) : super(key: key);
 
+  /// Returns new MaterialPageRoute
   static Route<String> route() {
-    return MaterialPageRoute(builder: (_) => const SearchPage._());
+    return MaterialPageRoute(
+      builder: (_) => const SearchPage._(),
+    );
   }
 
   @override
@@ -52,7 +56,10 @@ class _SearchPageState extends State<SearchPage> {
               children: [
                 Expanded(
                   child: TextField(
-                    style: const TextStyle(fontSize: 27, height: 1.2),
+                    style: const TextStyle(
+                      fontSize: 27,
+                      height: 1.2,
+                    ),
                     textAlignVertical: TextAlignVertical.bottom,
                     cursorColor: Colors.black,
                     cursorHeight: 27,
@@ -76,14 +83,15 @@ class _SearchPageState extends State<SearchPage> {
                         borderRadius: BorderRadius.circular(30),
                         borderSide: const BorderSide(
                           width: 1.2,
-                          color: Colors.black,
                         ),
                       ),
                     ),
                   ),
                 ),
                 IconButton(
-                  key: const Key('searchPage_search_iconButton'),
+                  key: const Key(
+                    'searchPage_search_iconButton',
+                  ),
                   icon: const Icon(Icons.search),
                   tooltip: 'search for city',
                   onPressed: () {
@@ -92,11 +100,16 @@ class _SearchPageState extends State<SearchPage> {
                         : ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               backgroundColor: Colors.white,
-                              duration: const Duration(seconds: 3),
-                              padding: EdgeInsets.all(Sizing.standard),
+                              duration: const Duration(
+                                seconds: 3,
+                              ),
+                              padding: EdgeInsets.all(
+                                Sizing.standard,
+                              ),
                               content: Image.asset(
-                                  'assets/unicorn_snackbar_black.png',
-                                  scale: 4.5),
+                                'assets/unicorn_snackbar_black.png',
+                                scale: 4.5,
+                              ),
                             ),
                           );
                   },

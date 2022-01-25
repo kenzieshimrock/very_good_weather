@@ -6,24 +6,40 @@ part of 'weather_cubit.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-WeatherState _$WeatherStateFromJson(Map<String, dynamic> json) {
-  return $checkedNew('WeatherState', json, () {
-    final val = WeatherState(
-      status: $checkedConvert(
-          json, 'status', (v) => _$enumDecode(_$WeatherStatusEnumMap, v)),
-      temperatureUnits: $checkedConvert(json, 'temperature_units',
-          (v) => _$enumDecode(_$TemperatureUnitsEnumMap, v)),
-      weather: $checkedConvert(
+WeatherState _$WeatherStateFromJson(
+  Map<String, dynamic> json,
+) {
+  return $checkedNew(
+    'WeatherState',
+    json,
+    () {
+      final val = WeatherState(
+        status: $checkedConvert(
+          json,
+          'status',
+          (dynamic v) => _$enumDecode(_$WeatherStatusEnumMap, v),
+        ),
+        temperatureUnits: $checkedConvert(
+          json,
+          'temperature_units',
+          (dynamic v) => _$enumDecode(_$TemperatureUnitsEnumMap, v),
+        ),
+        weather: $checkedConvert(
           json,
           'weather',
-          (v) =>
-              v == null ? null : Weather.fromJson(v as Map<String, dynamic>)),
-    );
-    return val;
-  }, fieldKeyMap: const {'temperatureUnits': 'temperature_units'});
+          (dynamic v) =>
+              v == null ? null : Weather.fromJson(v as Map<String, dynamic>),
+        ),
+      );
+      return val;
+    },
+    fieldKeyMap: const {'temperatureUnits': 'temperature_units'},
+  );
 }
 
-Map<String, dynamic> _$WeatherStateToJson(WeatherState instance) =>
+Map<String, dynamic> _$WeatherStateToJson(
+  WeatherState instance,
+) =>
     <String, dynamic>{
       'status': _$WeatherStatusEnumMap[instance.status],
       'weather': instance.weather.toJson(),
@@ -51,7 +67,10 @@ K _$enumDecode<K, V>(
           '${enumValues.values.join(', ')}',
         );
       }
-      return MapEntry(unknownValue, enumValues.values.first);
+      return MapEntry(
+        unknownValue,
+        enumValues.values.first,
+      );
     },
   ).key;
 }

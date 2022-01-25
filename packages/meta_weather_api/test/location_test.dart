@@ -5,9 +5,11 @@ import 'package:test/test.dart';
 void main() {
   group('Location', () {
     group('fromJson', () {
-      test('throws CheckedFromJsonException when enum is unknown', () {
+      test(
+          'throws CheckedFromJsonException when enum is unknown',
+          () {
         expect(
-              () => Location.fromJson(<String, dynamic>{
+          () => Location.fromJson(<String, dynamic>{
             'title': 'mock-title',
             'location_type': 'Unknown',
             'latt_long': '-34.75,83.28',

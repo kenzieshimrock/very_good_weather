@@ -6,33 +6,61 @@ part of 'weather.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Temperature _$TemperatureFromJson(Map<String, dynamic> json) {
+Temperature _$TemperatureFromJson(
+  Map<String, dynamic> json,
+) {
   return $checkedNew('Temperature', json, () {
     final val = Temperature(
-      value: $checkedConvert(json, 'value', (v) => (v as num).toDouble()),
+      value: $checkedConvert(
+        json,
+        'value',
+        (dynamic v) => (v as num).toDouble(),
+      ),
     );
     return val;
   });
 }
 
-Map<String, dynamic> _$TemperatureToJson(Temperature instance) =>
+Map<String, dynamic> _$TemperatureToJson(
+  Temperature instance,
+) =>
     <String, dynamic>{
       'value': instance.value,
     };
 
 Weather _$WeatherFromJson(Map<String, dynamic> json) {
-  return $checkedNew('Weather', json, () {
-    final val = Weather(
-      condition: $checkedConvert(
-          json, 'condition', (v) => _$enumDecode(_$WeatherConditionEnumMap, v)),
-      lastUpdated: $checkedConvert(
-          json, 'last_updated', (v) => DateTime.parse(v as String)),
-      location: $checkedConvert(json, 'location', (v) => v as String),
-      temperature: $checkedConvert(json, 'temperature',
-          (v) => Temperature.fromJson(v as Map<String, dynamic>)),
-    );
-    return val;
-  }, fieldKeyMap: const {'lastUpdated': 'last_updated'});
+  return $checkedNew(
+    'Weather',
+    json,
+    () {
+      final val = Weather(
+        condition: $checkedConvert(
+          json,
+          'condition',
+          (dynamic v) => _$enumDecode(_$WeatherConditionEnumMap, v),
+        ),
+        lastUpdated: $checkedConvert(
+          json,
+          'last_updated',
+          (dynamic v) => DateTime.parse(v as String),
+        ),
+        location: $checkedConvert(
+          json,
+          'location',
+          (dynamic v) => v as String,
+        ),
+        temperature: $checkedConvert(
+          json,
+          'temperature',
+          (dynamic v) => Temperature.fromJson(
+            v as Map<String, dynamic>,
+          ),
+        ),
+      );
+      return val;
+    },
+    fieldKeyMap: const {'lastUpdated': 'last_updated'},
+  );
 }
 
 Map<String, dynamic> _$WeatherToJson(Weather instance) => <String, dynamic>{
@@ -63,7 +91,10 @@ K _$enumDecode<K, V>(
           '${enumValues.values.join(', ')}',
         );
       }
-      return MapEntry(unknownValue, enumValues.values.first);
+      return MapEntry(
+        unknownValue,
+        enumValues.values.first,
+      );
     },
   ).key;
 }
