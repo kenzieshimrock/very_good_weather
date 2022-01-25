@@ -1,13 +1,20 @@
 # See https://www.dartlang.org/guides/libraries/private-files
 
+# Miscellaneous
+.DS_Store
 
 # Flutter repo-specific
 /packages/flutter/coverage/
 
-
 # Coverage
 coverage/
-# Files and directories created by pub
+
+# Intellij Related
+.idea/*
+
+# Flutter/Dart/Pub related
+.flutter-plugins-dependencies
+.flutter-plugins
 .dart_tool/
 .packages
 build/
