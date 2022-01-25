@@ -37,8 +37,7 @@ Weather _$WeatherFromJson(Map<String, dynamic> json) {
         condition: $checkedConvert(
           json,
           'condition',
-          (dynamic v) =>
-              _$enumDecode(_$WeatherConditionEnumMap, v),
+          (dynamic v) => _$enumDecode(_$WeatherConditionEnumMap, v),
         ),
         lastUpdated: $checkedConvert(
           json,
@@ -64,12 +63,9 @@ Weather _$WeatherFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$WeatherToJson(Weather instance) =>
-    <String, dynamic>{
-      'condition':
-          _$WeatherConditionEnumMap[instance.condition],
-      'last_updated':
-          instance.lastUpdated.toIso8601String(),
+Map<String, dynamic> _$WeatherToJson(Weather instance) => <String, dynamic>{
+      'condition': _$WeatherConditionEnumMap[instance.condition],
+      'last_updated': instance.lastUpdated.toIso8601String(),
       'location': instance.location,
       'temperature': instance.temperature.toJson(),
     };

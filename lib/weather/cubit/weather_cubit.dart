@@ -12,8 +12,7 @@ part 'weather_state.dart';
 /// emits state changes.
 class WeatherCubit extends HydratedCubit<WeatherState> {
   /// WeatherCubit constructor
-  WeatherCubit(this._weatherRepository)
-      : super(WeatherState());
+  WeatherCubit(this._weatherRepository) : super(WeatherState());
 
   final WeatherRepository _weatherRepository;
 
@@ -78,8 +77,7 @@ class WeatherCubit extends HydratedCubit<WeatherState> {
          state's location.
        */
       final weather = Weather.fromRepository(
-        await _weatherRepository
-            .getWeather(state.weather.location),
+        await _weatherRepository.getWeather(state.weather.location),
       );
 
       // Current temperature units
@@ -146,8 +144,7 @@ class WeatherCubit extends HydratedCubit<WeatherState> {
 
   // For state data Persistence
   @override
-  Map<String, dynamic> toJson(WeatherState state) =>
-      state.toJson();
+  Map<String, dynamic> toJson(WeatherState state) => state.toJson();
 }
 
 extension on double {

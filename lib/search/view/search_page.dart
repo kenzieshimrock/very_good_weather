@@ -17,8 +17,7 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
-  final TextEditingController _textController =
-      TextEditingController();
+  final TextEditingController _textController = TextEditingController();
 
   String get _text => _textController.text;
 
@@ -61,32 +60,27 @@ class _SearchPageState extends State<SearchPage> {
                       fontSize: 27,
                       height: 1.2,
                     ),
-                    textAlignVertical:
-                        TextAlignVertical.bottom,
+                    textAlignVertical: TextAlignVertical.bottom,
                     cursorColor: Colors.black,
                     cursorHeight: 27,
                     autofocus: true,
                     controller: _textController,
-                    onSubmitted: (_) =>
-                        Navigator.of(context).pop(_text),
+                    onSubmitted: (_) => Navigator.of(context).pop(_text),
                     decoration: InputDecoration(
                       hintText: 'City Name',
                       hintStyle: const TextStyle(
                         fontSize: 25,
                         color: Colors.black38,
                       ),
-                      contentPadding:
-                          const EdgeInsets.symmetric(
+                      contentPadding: const EdgeInsets.symmetric(
                         vertical: 10,
                         horizontal: 20,
                       ),
                       border: OutlineInputBorder(
-                        borderRadius:
-                            BorderRadius.circular(30),
+                        borderRadius: BorderRadius.circular(30),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderRadius:
-                            BorderRadius.circular(30),
+                        borderRadius: BorderRadius.circular(30),
                         borderSide: const BorderSide(
                           width: 1.2,
                         ),
@@ -103,8 +97,7 @@ class _SearchPageState extends State<SearchPage> {
                   onPressed: () {
                     _textController.text.isNotEmpty
                         ? Navigator.of(context).pop(_text)
-                        : ScaffoldMessenger.of(context)
-                            .showSnackBar(
+                        : ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               backgroundColor: Colors.white,
                               duration: const Duration(

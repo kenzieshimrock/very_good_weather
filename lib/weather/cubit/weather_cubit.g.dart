@@ -17,28 +17,23 @@ WeatherState _$WeatherStateFromJson(
         status: $checkedConvert(
           json,
           'status',
-          (dynamic v) =>
-              _$enumDecode(_$WeatherStatusEnumMap, v),
+          (dynamic v) => _$enumDecode(_$WeatherStatusEnumMap, v),
         ),
         temperatureUnits: $checkedConvert(
           json,
           'temperature_units',
-          (dynamic v) =>
-              _$enumDecode(_$TemperatureUnitsEnumMap, v),
+          (dynamic v) => _$enumDecode(_$TemperatureUnitsEnumMap, v),
         ),
         weather: $checkedConvert(
           json,
           'weather',
-          (dynamic v) => v == null
-              ? null
-              : Weather.fromJson(v as Map<String, dynamic>),
+          (dynamic v) =>
+              v == null ? null : Weather.fromJson(v as Map<String, dynamic>),
         ),
       );
       return val;
     },
-    fieldKeyMap: const {
-      'temperatureUnits': 'temperature_units'
-    },
+    fieldKeyMap: const {'temperatureUnits': 'temperature_units'},
   );
 }
 
@@ -48,8 +43,7 @@ Map<String, dynamic> _$WeatherStateToJson(
     <String, dynamic>{
       'status': _$WeatherStatusEnumMap[instance.status],
       'weather': instance.weather.toJson(),
-      'temperature_units': _$TemperatureUnitsEnumMap[
-          instance.temperatureUnits],
+      'temperature_units': _$TemperatureUnitsEnumMap[instance.temperatureUnits],
     };
 
 K _$enumDecode<K, V>(

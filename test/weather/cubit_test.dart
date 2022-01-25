@@ -9,31 +9,25 @@ import 'package:weather_repository/weather_repository.dart'
 import '../helpers/hydrated_bloc.dart';
 
 const weatherLocation = 'London';
-const weatherCondition =
-    weather_repository.WeatherCondition.rainy;
+const weatherCondition = weather_repository.WeatherCondition.rainy;
 const weatherTemperature = 9.8;
 
 class MockWeatherRepository extends Mock
     implements weather_repository.WeatherRepository {}
 
-class MockWeather extends Mock
-    implements weather_repository.Weather {}
+class MockWeather extends Mock implements weather_repository.Weather {}
 
 void main() {
   group('WeatherCubit', () {
     late weather_repository.Weather weather;
-    late weather_repository.WeatherRepository
-        weatherRepository;
+    late weather_repository.WeatherRepository weatherRepository;
 
     setUp(() {
       weather = MockWeather();
       weatherRepository = MockWeatherRepository();
-      when(() => weather.condition)
-          .thenReturn(weatherCondition);
-      when(() => weather.location)
-          .thenReturn(weatherLocation);
-      when(() => weather.temperature)
-          .thenReturn(weatherTemperature);
+      when(() => weather.condition).thenReturn(weatherCondition);
+      when(() => weather.location).thenReturn(weatherLocation);
+      when(() => weather.temperature).thenReturn(weatherTemperature);
       when(
         () => weatherRepository.getWeather(any()),
       ).thenAnswer((_) async => weather);
@@ -41,8 +35,7 @@ void main() {
 
     test('initial state is correct', () {
       mockHydratedStorage(() {
-        final weatherCubit =
-            WeatherCubit(weatherRepository);
+        final weatherCubit = WeatherCubit(weatherRepository);
         expect(weatherCubit.state, WeatherState());
       });
     });
@@ -50,8 +43,7 @@ void main() {
     group('toJson/fromJson', () {
       test('work properly', () {
         mockHydratedStorage(() {
-          final weatherCubit =
-              WeatherCubit(weatherRepository);
+          final weatherCubit = WeatherCubit(weatherRepository);
           expect(
             weatherCubit.fromJson(
               weatherCubit.toJson(weatherCubit.state),
@@ -89,8 +81,7 @@ void main() {
         act: (cubit) => cubit.fetchWeather(weatherLocation),
         verify: (_) {
           verify(
-            () => weatherRepository
-                .getWeather(weatherLocation),
+            () => weatherRepository.getWeather(weatherLocation),
           ).called(1);
         },
       );
@@ -194,8 +185,7 @@ void main() {
                       (w) => w.temperature,
                       'temperature',
                       Temperature(
-                        value: weatherTemperature
-                            .toFahrenheit(),
+                        value: weatherTemperature.toFahrenheit(),
                       ),
                     )
                     .having(
@@ -228,8 +218,7 @@ void main() {
         build: () => mockHydratedStorage(
           () => WeatherCubit(weatherRepository),
         ),
-        seed: () =>
-            WeatherState(status: WeatherStatus.success),
+        seed: () => WeatherState(status: WeatherStatus.success),
         act: (cubit) => cubit.refreshWeather(),
         expect: () => <WeatherState>[],
         verify: (_) {
@@ -248,8 +237,7 @@ void main() {
           status: WeatherStatus.success,
           weather: Weather(
             location: weatherLocation,
-            temperature:
-                Temperature(value: weatherTemperature),
+            temperature: Temperature(value: weatherTemperature),
             lastUpdated: DateTime(2020),
             condition: weatherCondition,
           ),
@@ -257,8 +245,7 @@ void main() {
         act: (cubit) => cubit.refreshWeather(),
         verify: (_) {
           verify(
-            () => weatherRepository
-                .getWeather(weatherLocation),
+            () => weatherRepository.getWeather(weatherLocation),
           ).called(1);
         },
       );
@@ -277,8 +264,7 @@ void main() {
           status: WeatherStatus.success,
           weather: Weather(
             location: weatherLocation,
-            temperature:
-                Temperature(value: weatherTemperature),
+            temperature: Temperature(value: weatherTemperature),
             lastUpdated: DateTime(2020),
             condition: weatherCondition,
           ),
@@ -380,8 +366,7 @@ void main() {
                       (w) => w.temperature,
                       'temperature',
                       Temperature(
-                        value: weatherTemperature
-                            .toFahrenheit(),
+                        value: weatherTemperature.toFahrenheit(),
                       ),
                     )
                     .having(
@@ -419,8 +404,7 @@ void main() {
           temperatureUnits: TemperatureUnits.fahrenheit,
           weather: Weather(
             location: weatherLocation,
-            temperature:
-                Temperature(value: weatherTemperature),
+            temperature: Temperature(value: weatherTemperature),
             lastUpdated: DateTime(2020),
             condition: WeatherCondition.rainy,
           ),
@@ -451,8 +435,7 @@ void main() {
           status: WeatherStatus.success,
           weather: Weather(
             location: weatherLocation,
-            temperature:
-                Temperature(value: weatherTemperature),
+            temperature: Temperature(value: weatherTemperature),
             lastUpdated: DateTime(2020),
             condition: WeatherCondition.rainy,
           ),

@@ -15,7 +15,7 @@ void main() {
 
     testWidgets(
       'renders correct text',
-          (tester) async {
+      (tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(

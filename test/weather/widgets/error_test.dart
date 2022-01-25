@@ -5,8 +5,7 @@ import 'package:very_good_weather/weather/widgets/weather_error.dart';
 
 void main() {
   group('WeatherError', () {
-    testWidgets('renders correct text and icon',
-        (tester) async {
+    testWidgets('renders correct text and icon', (tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(

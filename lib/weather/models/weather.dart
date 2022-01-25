@@ -1,9 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:weather_repository/weather_repository.dart' hide Weather;
 import 'package:weather_repository/weather_repository.dart'
-    hide Weather;
-import 'package:weather_repository/weather_repository.dart'
-as weather_repository;
+    as weather_repository;
 
 part 'weather.g.dart';
 
@@ -19,8 +18,7 @@ enum TemperatureUnits {
 /// TemperatureUnits enumeration extension
 extension TemperatureUnitsX on TemperatureUnits {
   /// boolean "assignment" of temperature unit fahrenheit status
-  bool get isFahrenheit =>
-      this == TemperatureUnits.fahrenheit;
+  bool get isFahrenheit => this == TemperatureUnits.fahrenheit;
 
   /// boolean "assignment" of temperature unit celsius status
   bool get isCelsius => this == TemperatureUnits.celsius;
@@ -40,8 +38,7 @@ class Temperature extends Equatable {
   final double value;
 
   /// Json Serialization
-  Map<String, dynamic> toJson() =>
-      _$TemperatureToJson(this);
+  Map<String, dynamic> toJson() => _$TemperatureToJson(this);
 
   @override
   List<Object> get props => [value];
@@ -65,7 +62,8 @@ class Weather extends Equatable {
   /// Retrieves weather data from weather_repository and creates
   /// Weather() instance with applicable data
   factory Weather.fromRepository(
-      weather_repository.Weather weather,) {
+    weather_repository.Weather weather,
+  ) {
     return Weather(
       condition: weather.condition,
       lastUpdated: DateTime.now(),
@@ -96,8 +94,7 @@ class Weather extends Equatable {
   final Temperature temperature;
 
   @override
-  List<Object> get props =>
-      [condition, lastUpdated, location, temperature];
+  List<Object> get props => [condition, lastUpdated, location, temperature];
 
   /// Json Serialization
   Map<String, dynamic> toJson() => _$WeatherToJson(this);

@@ -8,8 +8,8 @@ import 'package:very_good_weather/settings/view/settings_page.dart';
 import 'package:very_good_weather/weather/cubit/weather_cubit.dart';
 import 'package:very_good_weather/weather/models/weather.dart';
 
-class MockWeatherCubit extends MockCubit<WeatherState>
-    implements WeatherCubit {}
+class MockWeatherCubit extends MockCubit<WeatherState> implements WeatherCubit {
+}
 
 void main() {
   group('SettingsPage', () {
@@ -20,8 +20,7 @@ void main() {
     });
 
     testWidgets('is routable', (tester) async {
-      when(() => weatherCubit.state)
-          .thenReturn(WeatherState());
+      when(() => weatherCubit.state).thenReturn(WeatherState());
       await tester.pumpWidget(
         MaterialApp(
           home: Builder(
@@ -42,8 +41,7 @@ void main() {
       expect(find.byType(SettingsPage), findsOneWidget);
     });
 
-    testWidgets('calls toggleUnits when switch is changed',
-        (tester) async {
+    testWidgets('calls toggleUnits when switch is changed', (tester) async {
       whenListen(
         weatherCubit,
         Stream.fromIterable([
@@ -52,8 +50,7 @@ void main() {
           ),
         ]),
       );
-      when(() => weatherCubit.state)
-          .thenReturn(WeatherState());
+      when(() => weatherCubit.state).thenReturn(WeatherState());
       await tester.pumpWidget(
         MaterialApp(
           home: Builder(

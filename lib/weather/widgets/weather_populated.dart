@@ -69,8 +69,7 @@ class WeatherPopulated extends StatelessWidget {
 }
 
 class _WeatherIcon extends StatelessWidget {
-  const _WeatherIcon({Key? key, required this.condition})
-      : super(key: key);
+  const _WeatherIcon({Key? key, required this.condition}) : super(key: key);
 
   final WeatherCondition condition;
 

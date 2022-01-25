@@ -58,10 +58,9 @@ class WeatherAppView extends StatelessWidget {
         textTheme: GoogleFonts.dongleTextTheme(),
         appBarTheme: AppBarTheme(
           backgroundColor: Colors.white,
-          titleTextStyle:
-              GoogleFonts.dongleTextTheme(textTheme)
-                  .apply(bodyColor: Colors.black)
-                  .headline6,
+          titleTextStyle: GoogleFonts.dongleTextTheme(textTheme)
+              .apply(bodyColor: Colors.black)
+              .headline6,
         ),
         iconTheme: const IconThemeData(
           color: Colors.black,

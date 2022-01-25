@@ -17,8 +17,7 @@ class WeatherPage extends StatelessWidget {
     // BlocProvider creates the single instance of WeatherCubit() within
     // the widget tree
     return BlocProvider(
-      create: (context) =>
-          WeatherCubit(context.read<WeatherRepository>()),
+      create: (context) => WeatherCubit(context.read<WeatherRepository>()),
       child: const WeatherView(),
     );
   }
@@ -88,9 +87,7 @@ class _WeatherViewState extends State<WeatherView> {
                     weather: state.weather,
                     units: state.temperatureUnits,
                     onRefresh: () {
-                      return context
-                          .read<WeatherCubit>()
-                          .refreshWeather();
+                      return context.read<WeatherCubit>().refreshWeather();
                     },
                   );
                 case WeatherStatus.failure:
@@ -105,12 +102,9 @@ class _WeatherViewState extends State<WeatherView> {
         tooltip: 'search',
         child: const Icon(Icons.search),
         onPressed: () async {
-          final city = await Navigator.of(context)
-              .push(SearchPage.route());
+          final city = await Navigator.of(context).push(SearchPage.route());
           if (!mounted) return;
-          await context
-              .read<WeatherCubit>()
-              .fetchWeather(city);
+          await context.read<WeatherCubit>().fetchWeather(city);
         },
       ),
     );
