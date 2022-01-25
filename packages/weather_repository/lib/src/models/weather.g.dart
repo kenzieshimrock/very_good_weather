@@ -9,20 +9,33 @@ part of 'weather.dart';
 Weather _$WeatherFromJson(Map<String, dynamic> json) {
   return $checkedNew('Weather', json, () {
     final val = Weather(
-      location: $checkedConvert(json, 'location', (v) => v as String),
-      temperature:
-          $checkedConvert(json, 'temperature', (v) => (v as num).toDouble()),
+      location: $checkedConvert(
+        json,
+        'location',
+        (dynamic v) => v as String,
+      ),
+      temperature: $checkedConvert(
+        json,
+        'temperature',
+        (dynamic v) => (v as num).toDouble(),
+      ),
       condition: $checkedConvert(
-          json, 'condition', (v) => _$enumDecode(_$WeatherConditionEnumMap, v)),
+        json,
+        'condition',
+        (dynamic v) =>
+            _$enumDecode(_$WeatherConditionEnumMap, v),
+      ),
     );
     return val;
   });
 }
 
-Map<String, dynamic> _$WeatherToJson(Weather instance) => <String, dynamic>{
+Map<String, dynamic> _$WeatherToJson(Weather instance) =>
+    <String, dynamic>{
       'location': instance.location,
       'temperature': instance.temperature,
-      'condition': _$WeatherConditionEnumMap[instance.condition],
+      'condition':
+          _$WeatherConditionEnumMap[instance.condition],
     };
 
 K _$enumDecode<K, V>(
@@ -46,7 +59,10 @@ K _$enumDecode<K, V>(
           '${enumValues.values.join(', ')}',
         );
       }
-      return MapEntry(unknownValue, enumValues.values.first);
+      return MapEntry(
+        unknownValue,
+        enumValues.values.first,
+      );
     },
   ).key;
 }
