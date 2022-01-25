@@ -22,6 +22,9 @@ class SettingsPage extends StatelessWidget {
     );
   }
 
+  /// celsius or fahrenheit
+  String temperatureString;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,6 +48,14 @@ class SettingsPage extends StatelessWidget {
                   previous.temperatureUnits !=
                   current.temperatureUnits,
               builder: (context, state) {
+                /// This had to be created because Intellij would
+                /// not format correctly when placed as string interpolation
+                /// inline. Exceeded 80 lines + max-lines formatting settings
+                /// are properly set. Looking for solution.
+                temperatureString =
+                    state.temperatureUnits.isCelsius
+                        ? 'Celsius'
+                        : 'Fahrenheit';
                 return ListTile(
                   title: Text(
                     'Temperature Units',
@@ -54,7 +65,7 @@ class SettingsPage extends StatelessWidget {
                   ),
                   isThreeLine: true,
                   subtitle: Text(
-                    'Current: ${state.temperatureUnits.isCelsius ? 'Celsius' : 'Fahrenheit'}',
+                    'Current: $temperatureString',
                     style: TextStyle(
                       fontSize: Sizing.medium,
                       color: Colors.black38,
