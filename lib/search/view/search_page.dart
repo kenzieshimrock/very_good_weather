@@ -61,7 +61,10 @@ class _SearchPageState extends State<SearchPage> {
                     onSubmitted: (_) => Navigator.of(context).pop(_text),
                     decoration: InputDecoration(
                       hintText: 'City Name',
-                      hintStyle: const TextStyle(fontSize: 25),
+                      hintStyle: const TextStyle(
+                        fontSize: 25,
+                        color: Colors.black38,
+                      ),
                       contentPadding: const EdgeInsets.symmetric(
                         vertical: 10,
                         horizontal: 20,

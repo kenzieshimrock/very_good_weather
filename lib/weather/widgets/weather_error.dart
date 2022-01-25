@@ -22,7 +22,10 @@ class WeatherError extends StatelessWidget {
         Text(
           'Check your connection, or try searching for a different city.',
           textAlign: TextAlign.center,
-          style: TextStyle(fontSize: Sizing.standard),
+          style: TextStyle(
+            fontSize: Sizing.medium,
+            color: Colors.black38,
+          ),
         ),
       ],
     );
