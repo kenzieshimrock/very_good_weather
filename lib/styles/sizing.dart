@@ -10,7 +10,7 @@ abstract class Sizing {
   static double get standard => 16;
 
   /// medium
-  static double get medium => 24;
+  static double get medium => 27;
 
   /// large
   static double get large => 36;
