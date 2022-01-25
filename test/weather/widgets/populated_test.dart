@@ -15,7 +15,7 @@ void main() {
 
     testWidgets(
       'renders correct text',
-      (tester) async {
+          (tester) async {
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -30,7 +30,8 @@ void main() {
         expect(find.text('Chicago'), findsOneWidget);
       },
     );
-    // Want to test for proper images being populated in the weather populated page.
+    // Want to test for proper images being populated in the weather
+    // populated page.
     // todo: research testing asset images.
   });
 }

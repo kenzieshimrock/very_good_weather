@@ -3,16 +3,23 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:very_good_weather/styles/sizing.dart';
 import 'package:very_good_weather/weather/weather.dart';
 
+/// SettingsPage widget
 class SettingsPage extends StatelessWidget {
+  /// SettingsPage Widget constructor
   const SettingsPage({Key? key}) : super(key: key);
 
+  /// Returns new MaterialPageRoute
   static Route route(WeatherCubit weatherCubit) {
     return MaterialPageRoute<void>(
-      // BlocProvider.value provides the existing WeatherCubit instance to its child.
-      builder: (_) => BlocProvider.value(
-        value: weatherCubit,
-        child: const SettingsPage(),
-      ),
+      /*
+       BlocProvider.value provides the existing WeatherCubit
+       instance to its child.
+       */
+      builder: (_) =>
+          BlocProvider.value(
+            value: weatherCubit,
+            child: const SettingsPage(),
+          ),
     );
   }
 
@@ -30,19 +37,26 @@ class SettingsPage extends StatelessWidget {
         padding: EdgeInsets.all(Sizing.standard),
         child: ListView(
           children: <Widget>[
-            // BlocBuilder rebuilds UI based on state changes emitting from WeatherCubit() instance
+            /*
+               BlocBuilder rebuilds UI based on state changes emitting from
+                WeatherCubit() instance
+             */
             BlocBuilder<WeatherCubit, WeatherState>(
               buildWhen: (previous, current) =>
-                  previous.temperatureUnits != current.temperatureUnits,
+              previous.temperatureUnits !=
+                  current.temperatureUnits,
               builder: (context, state) {
                 return ListTile(
                   title: Text(
                     'Temperature Units',
-                    style: TextStyle(fontSize: Sizing.medium),
+                    style:
+                    TextStyle(fontSize: Sizing.medium),
                   ),
                   isThreeLine: true,
                   subtitle: Text(
-                    'Current: ${state.temperatureUnits.isCelsius ? 'Celsius' : 'Fahrenheit'}',
+                    'Current: ${state.temperatureUnits
+                        .isCelsius ? 'Celsius'
+                        : 'Fahrenheit'}',
                     style: TextStyle(
                       fontSize: Sizing.medium,
                       color: Colors.black38,
@@ -51,7 +65,9 @@ class SettingsPage extends StatelessWidget {
                   trailing: Switch(
                     value: state.temperatureUnits.isCelsius,
                     onChanged: (_) =>
-                        context.read<WeatherCubit>().toggleUnits(),
+                        context
+                            .read<WeatherCubit>()
+                            .toggleUnits(),
                   ),
                 );
               },

@@ -5,7 +5,8 @@ import 'package:very_good_weather/weather/widgets/weather_error.dart';
 
 void main() {
   group('WeatherError', () {
-    testWidgets('renders correct text and icon', (tester) async {
+    testWidgets('renders correct text and icon',
+        (tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -13,12 +14,20 @@ void main() {
           ),
         ),
       );
-      expect(find.text('Something went wrong!'), findsOneWidget);
       expect(
-          find.text(
-              'Check your connection, or try searching for a different city.'),
-          findsWidgets);
-      expect(find.byIcon(Icons.error_outline), findsOneWidget);
+        find.text('Something went wrong!'),
+        findsOneWidget,
+      );
+      expect(
+        find.text(
+          'Check your connection, or try searching for a different city.',
+        ),
+        findsWidgets,
+      );
+      expect(
+        find.byIcon(Icons.error_outline),
+        findsOneWidget,
+      );
     });
   });
 }

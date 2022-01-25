@@ -7,7 +7,7 @@ import 'package:very_good_weather/app.dart';
 import 'package:very_good_weather/weather_bloc_observer.dart';
 import 'package:weather_repository/weather_repository.dart';
 
-void main() async {
+Future<void> main() async {
   FlutterServicesBinding.ensureInitialized();
   final storage = await HydratedStorage.build(
     storageDirectory: kIsWeb

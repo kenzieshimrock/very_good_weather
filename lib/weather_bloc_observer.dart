@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 
+/// Observes behavior of WeatherBloc
 class WeatherBlocObserver extends BlocObserver {
   @override
   void onEvent(Bloc bloc, Object? event) {
@@ -20,7 +21,11 @@ class WeatherBlocObserver extends BlocObserver {
   }
 
   @override
-  void onError(BlocBase bloc, Object error, StackTrace stackTrace) {
+  void onError(
+    BlocBase bloc,
+    Object error,
+    StackTrace stackTrace,
+  ) {
     print('onError $error');
     super.onError(bloc, error, stackTrace);
   }
