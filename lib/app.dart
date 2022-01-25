@@ -32,16 +32,20 @@ class WeatherAppView extends StatelessWidget {
         switchTheme: SwitchThemeData(
           thumbColor: MaterialStateProperty.resolveWith(
             (states) {
+              Color? color;
               if (states.contains(MaterialState.selected)) {
-                return Colors.white;
+                color = Colors.white;
               }
+              return color;
             },
           ),
           trackColor: MaterialStateProperty.resolveWith(
             (states) {
+              Color? color;
               if (states.contains(MaterialState.selected)) {
-                return Colors.black;
+                color = Colors.black;
               }
+              return color;
             },
           ),
         ),
