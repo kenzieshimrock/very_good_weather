@@ -6,6 +6,7 @@ import 'package:weather_repository/weather_repository.dart'
     show WeatherRepository;
 
 part 'weather_cubit.g.dart';
+
 part 'weather_state.dart';
 
 class WeatherCubit extends HydratedCubit<WeatherState> {
@@ -75,6 +76,7 @@ class WeatherCubit extends HydratedCubit<WeatherState> {
           weather: weather.copyWith(temperature: Temperature(value: value)),
         ),
       );
+
       // if there is no update to state properties, emit "new" state with unchanged values
     } on Exception {
       emit(state);
