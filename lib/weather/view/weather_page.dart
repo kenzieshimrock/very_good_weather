@@ -35,7 +35,10 @@ class WeatherView extends StatelessWidget {
             SizedBox(
               width: Sizing.standard,
             ),
-            const Text('Very Good Weather'),
+            Text(
+              'Very Good Weather',
+              style: TextStyle(fontSize: Sizing.medium),
+            ),
           ],
         ),
         centerTitle: false,

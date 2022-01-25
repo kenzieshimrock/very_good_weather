@@ -4,17 +4,15 @@ import 'package:very_good_weather/styles/sizing.dart';
 import 'package:very_good_weather/weather/weather.dart';
 
 class SettingsPage extends StatelessWidget {
-
   const SettingsPage({Key? key}) : super(key: key);
 
   static Route route(WeatherCubit weatherCubit) {
     return MaterialPageRoute<void>(
       // BlocProvider.value provides the existing WeatherCubit instance to its child.
-      builder: (_) =>
-          BlocProvider.value(
-            value: weatherCubit,
-            child: const SettingsPage(),
-          ),
+      builder: (_) => BlocProvider.value(
+        value: weatherCubit,
+        child: const SettingsPage(),
+      ),
     );
   }
 
@@ -22,19 +20,9 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: IntrinsicWidth(
-          child: Row(
-            children: [
-              Image.asset(
-                'assets/vgv_logo.png',
-                scale: 14,
-              ),
-              SizedBox(
-                width: Sizing.standard,
-              ),
-              const Text('Very Good Settings'),
-            ],
-          ),
+        title: Text(
+          'Very Good Settings',
+          style: TextStyle(fontSize: Sizing.medium),
         ),
         iconTheme: const IconThemeData(color: Colors.black),
       ),
@@ -45,7 +33,7 @@ class SettingsPage extends StatelessWidget {
             // BlocBuilder rebuilds UI based on state changes emitting from WeatherCubit() instance
             BlocBuilder<WeatherCubit, WeatherState>(
               buildWhen: (previous, current) =>
-              previous.temperatureUnits != current.temperatureUnits,
+                  previous.temperatureUnits != current.temperatureUnits,
               builder: (context, state) {
                 return ListTile(
                   title: Text(
@@ -54,9 +42,7 @@ class SettingsPage extends StatelessWidget {
                   ),
                   isThreeLine: true,
                   subtitle: Text(
-                    'Current: ${state.temperatureUnits.isCelsius
-                        ? 'Celsius'
-                        : 'Fahrenheit'}',
+                    'Current: ${state.temperatureUnits.isCelsius ? 'Celsius' : 'Fahrenheit'}',
                     style: TextStyle(fontSize: Sizing.standard),
                   ),
                   trailing: Switch(
