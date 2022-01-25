@@ -42,16 +42,20 @@ class SettingsPage extends StatelessWidget {
              */
             BlocBuilder<WeatherCubit, WeatherState>(
               buildWhen: (previous, current) =>
-                  previous.temperatureUnits != current.temperatureUnits,
+                  previous.temperatureUnits !=
+                  current.temperatureUnits,
               builder: (context, state) {
                 return ListTile(
                   title: Text(
                     'Temperature Units',
-                    style: TextStyle(fontSize: Sizing.medium),
+                    style: TextStyle(
+                      fontSize: Sizing.medium,
+                    ),
                   ),
                   isThreeLine: true,
                   subtitle: Text(
-                    'Current: ${state.temperatureUnits.isCelsius ? 'Celsius' : 'Fahrenheit'}',
+                    'Current: ${state.temperatureUnits.isCelsius ? 'Celsius' :
+                    'Fahrenheit'}',
                     style: TextStyle(
                       fontSize: Sizing.medium,
                       color: Colors.black38,
@@ -59,8 +63,9 @@ class SettingsPage extends StatelessWidget {
                   ),
                   trailing: Switch(
                     value: state.temperatureUnits.isCelsius,
-                    onChanged: (_) =>
-                        context.read<WeatherCubit>().toggleUnits(),
+                    onChanged: (_) => context
+                        .read<WeatherCubit>()
+                        .toggleUnits(),
                   ),
                 );
               },
