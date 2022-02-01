@@ -32,6 +32,9 @@ class WeatherRepository {
   }
 }
 
+/// allows creation of WeatherState class functionality that is
+/// separate from the class's original functionality but allows the use
+/// of the class's original functionality.
 extension on WeatherState {
   WeatherCondition get toCondition {
     switch (this) {

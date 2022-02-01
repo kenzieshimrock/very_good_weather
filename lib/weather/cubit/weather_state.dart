@@ -31,6 +31,8 @@ extension WeatherStatusX on WeatherStatus {
 }
 
 /// WeatherState class
+/// JsonSerializable() annotation used to generate to/from JSON code for
+/// the WeatherState class.
 @JsonSerializable()
 class WeatherState extends Equatable {
   /// WeatherState constructor, sets default values for status and
@@ -41,10 +43,9 @@ class WeatherState extends Equatable {
     Weather? weather,
   }) : weather = weather ?? Weather.empty;
 
-  /// Json deserialization
+  /// Converts Json object to Map
   factory WeatherState.fromJson(
-    Map<String, dynamic> json,
-  ) =>
+      Map<String, dynamic> json,) =>
       _$WeatherStateFromJson(json);
 
   /// status of weather data retrieval
@@ -64,14 +65,17 @@ class WeatherState extends Equatable {
   }) {
     return WeatherState(
       status: status ?? this.status,
-      temperatureUnits: temperatureUnits ?? this.temperatureUnits,
+      temperatureUnits:
+      temperatureUnits ?? this.temperatureUnits,
       weather: weather ?? this.weather,
     );
   }
 
   /// Json Serialization
-  Map<String, dynamic> toJson() => _$WeatherStateToJson(this);
+  Map<String, dynamic> toJson() =>
+      _$WeatherStateToJson(this);
 
   @override
-  List<Object?> get props => [status, temperatureUnits, weather];
+  List<Object?> get props =>
+      [status, temperatureUnits, weather];
 }

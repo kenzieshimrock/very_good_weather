@@ -11,8 +11,9 @@ void main() {
             builder: (context) => Scaffold(
               floatingActionButton: FloatingActionButton(
                 onPressed: () {
-                  Navigator.of(context)
-                      .push(SearchPage.route());
+                  Navigator.of(context).push(
+                    SearchPage.route(),
+                  );
                 },
               ),
             ),

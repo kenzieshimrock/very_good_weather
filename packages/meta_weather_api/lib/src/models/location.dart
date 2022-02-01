@@ -74,17 +74,26 @@ class LatLng {
   final double longitude;
 }
 
-/// Latitude/Longitude convertor
+/// Latitude/Longitude convertor.
+/// JsonConverter allows conversion of LatLng type from Json string
+/// to individual latitude and longitude double values
+/// for application use, and conversion of individual doubles
+/// back to the original jsonString format ("float, float").
 class LatLngConverter
     implements JsonConverter<LatLng, String> {
   /// LatLngConverter constructor
   const LatLngConverter();
 
+  /// Converts the latitude and longitude values
+  /// from individual double values to original
+  /// jsonString format.
   @override
   String toJson(LatLng latLng) {
     return '${latLng.latitude},${latLng.longitude}';
   }
 
+  /// Converts the LatLng ("float,float") values from the Json Object to
+  /// individual latitude and longitude values (doubles).
   @override
   LatLng fromJson(String jsonString) {
     final parts = jsonString.split(',');
